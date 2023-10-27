@@ -1,11 +1,6 @@
 const getRandomJoke = async () => {
-  const url = "https://icanhazdadjoke.com/";
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-    },
-  });
+  const url = "/.netlify/functions/jokes";
+  const response = await fetch(url);
   const data = await response.json();
   const joke = data.joke;
   return joke;
