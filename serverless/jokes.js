@@ -1,7 +1,8 @@
-const fetch = require("node-fetch");
+export async function handler(event, context) {
+  const fetch = await import("node-fetch");
 
-exports.handler = async (event, context) => {
   const url = "https://icanhazdadjoke.com/";
+
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -9,7 +10,9 @@ exports.handler = async (event, context) => {
         Accept: "application/json",
       },
     });
+
     const jsonJoke = await response.json();
+
     return {
       statusCode: 200,
       body: JSON.stringify(jsonJoke),
@@ -17,4 +20,4 @@ exports.handler = async (event, context) => {
   } catch (error) {
     return { statusCode: 422, body: error.stack };
   }
-};
+}
